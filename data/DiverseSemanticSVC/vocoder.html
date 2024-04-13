@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+    <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    <title>DiverseSemanticSVC Demo Page</title>
+
+</head>
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h2 id="vocoder-samples" style="text-align: center;">
+        Performance of the Resolution Transformation based Features Fusion
+    </h2>
+    <p style="text-align: center;">
+        <img src="assets\pics\ReTrans.png" width="80%">
+        <br>
+        <b>Table</b>: The comparison between the proposed ReTrans and cross attention for features fusion.
+    </p>
+    <p>
+        To verify the necessity and efficiency of the proposed ReTrans strategy for feature alignment of mismatched time
+        resolutions, we select the classic cross attention as a baseline. Specifically, under DSFF-SVC framework, we
+        utilize only WeNet to extract semantic-based features and try different strategies to align its resolution to
+        that of F0 and energy features. We conduct the experiments on DiffWaveNetSVC and follow to adopt the cross
+        attention for features fusion within the diffusion model.
+    </p>
+
+    <div class="table-responsive pt-5">
+        <div class="table-responsive pt-3">
+            <h4>Reference</h4>
+            <audio preload="auto" controls="controls">
+                <source src="assets/audios/ref.wav" type="audio/wav">
+            </audio>
+            <audio preload="auto" controls="controls">
+                <source src="assets/audios/ref2.wav" type="audio/wav">
+            </audio>
+            <audio preload="auto" controls="controls">
+                <source src="assets/audios/ref3.wav" type="audio/wav">
+            </audio>
+        </div>
+
+        <br>
+
+        <div class="table-responsive pt-3">
+            <h4>Conversion Results</h4>
+            <table class="table table-hover pt-2">
+                <thead>
+                    <tr>
+                        <th style="width:360px; text-align:center; vertical-align:middle;">Source</th>
+                        <th style="width:360px; text-align:center; vertical-align:middle;">Cross Attention</th>
+                        <th style="width:360px; text-align:center; vertical-align:middle;">ReTrans</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\gt\Soprano-3_凉凉_0031.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\attention\Soprano-3_凉凉_0031_pred_autoshift.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\offline\Soprano-3_凉凉_0031.wav" />
+                            </audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\gt\Alto-6_房间_0011.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\attention\Alto-6_房间_0011_pred_autoshift.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\offline\Alto-6_房间_0011.wav" />
+                            </audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\gt\Tenor-7_失落沙洲_0007.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\attention\Tenor-7_失落沙洲_0007_pred_autoshift.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\offline\Tenor-7_失落沙洲_0007.wav" />
+                            </audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\gt\Bass-1_寂寞沙洲冷_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\attention\Bass-1_寂寞沙洲冷_0012_pred_autoshift.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:360px; text-align:center; vertical-align:middle;">
+                            <audio style="width:360px;" controls="controls" preload="auto">
+                                <source src="assets\audios\retrans\offline\Bass-1_寂寞沙洲冷_0012.wav" />
+                            </audio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+</html>

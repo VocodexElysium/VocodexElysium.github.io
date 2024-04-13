@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+    <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    <title>DiverseSemanticSVC Demo Page</title>
+
+</head>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h2 id="content-samples" style="text-align: center;">Performance of Different Semantic-based Features </h2>
+    <p style="text-align: center;">
+        <img src="assets/pics/results-different-content-features.png" width="60%">
+        <br>
+        <b>Table</b>: Objective evaluation results of different semantic-based features and their integration.
+    </p>
+    <!-- <p>
+        We observe that integrating multiple content features could be helpful in most cases.
+        For
+        example, from <i>WeNet</i> to <i>Wenet + Whisper</i>, and then to <i>Wenet + Whisper + ContentVec</i>, the
+        results of all the
+        metrics
+        are promoted stage by stage.
+    </p> -->
+    <p>
+        In this page, we will show some representative cases to
+    <ul>
+        <li>display the gap when using semantic-based features alone
+            to conduct the SVC task.</li>
+        <li>reveal that the complementary roles of the
+            diverse semantic-based features for SVC.</li>
+    </ul>
+    </p>
+    <p>
+        We select <i>DiffWaveNetSVC</i> as the base model and conduct experiments under the <i>Recording Studio
+            Setting</i>. We use <i>Opencpop</i> as the target singer, whose training corpus is 5.2 hours of studio
+        recorded singing voices. Here are some reference samples:
+    </p>
+
+    <!-- <h3>Reference</h3> -->
+    <p>
+        <audio controls="controls" preload="auto">
+            <source src="assets/audios/ref.wav" />
+        </audio>
+        <audio controls="controls" preload="auto">
+            <source src="assets/audios/ref2.wav" />
+        </audio>
+        <audio controls="controls" preload="auto">
+            <source src="assets/audios/ref3.wav" />
+        </audio>
+    </p>
+    <br>
+
+
+    <h3>Spectrogram Reconstruction</h3>
+    <p>
+        Firstly, we aim to evaluate the reconstruction performance among different semantic-based features. The
+        following samples are from Opencpop's test set:
+    </p>
+
+    <div class="table-responsive pt-3">
+        <table class="table table-hover pt-2">
+            <thead>
+                <tr>
+                    <th style="text-align: center"></th>
+                    <th style="text-align: center">Ground Truth</th>
+                    <th style="text-align: center">WeNet</th>
+                    <th style="text-align: center">WeNet + Whisper</th>
+                    <th style="text-align: center">WeNet + Whisper + ContentVec</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#1</b>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/0-gt-2092003417.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/0-12.56-ppg-2092003417.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/0-8.00-ppg+whisper-2092003417.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/0-5.02-ppg+whisper+contentVec-2092003417.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>MCD</b>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.00
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        12.56
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        8.00
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        5.02
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>Mel Spectrogram</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/0-gt-2092003417.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/0-12.56-ppg-2092003417.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/0-8.00-ppg+whisper-2092003417.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/0-5.02-ppg+whisper+contentVec-2092003417.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                </tr>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#2</b>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/1-gt-2092003414.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/1-11.20-ppg-2092003414.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/1-6.21-ppg+whisper-2092003414.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/1-3.66-ppg+whisper+contentVec-2092003414.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>MCD</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.00
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        11.20
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        6.21
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        3.66
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>Mel Spectrogram</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/1-gt-2092003414.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/1-11.20-ppg-2092003414.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/1-6.21-ppg+whisper-2092003414.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/1-3.66-ppg+whisper+contentVec-2092003414.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                </tr>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#3</b>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/2-gt-2100003752.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/2-13.40-ppg-2100003752.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/2-8.82-ppg+whisper-2100003752.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/mcd/2-6.51-ppg+whisper+contentVec-2100003752.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>MCD</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.00
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        13.40
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        8.82
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        6.51
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>Mel Spectrogram</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/2-gt-2100003752.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/2-13.40-ppg-2100003752.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/2-8.82-ppg+whisper-2100003752.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/mcd/2-6.51-ppg+whisper+contentVec-2100003752.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p style="color: #e22">
+        <b>Observation</b>: After integrating diverse semantic-features, the mel spectrograms
+        are approaching the
+        ground truth. The overall quality of the audios are also better.
+    </p>
+
+    <p>
+        <br><br>
+    </p>
+    <h3>Melody Modeling</h3>
+    <p>
+        Furthermore, we use the <i>M4Singer</i> as the source audios to conduct the singing voice conversion. Our
+        desired target singer is Opencpop. Here we evaluate the melody modeling capability of the different
+        semantic-features.
+    </p>
+
+    <div class="table-responsive pt-3">
+        <table class="table table-hover pt-2">
+            <thead>
+                <tr>
+                    <th style="text-align: center"></th>
+                    <th style="text-align: center">Source</th>
+                    <th style="text-align: center">WeNet</th>
+                    <th style="text-align: center">WeNet + Whisper</th>
+                    <th style="text-align: center">WeNet + Whisper + ContentVec</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#1</b>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/1-gt-Tenor-3_你给我听好_0031.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/1--0.44-ppg-Tenor-3_你给我听好_0031.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/1-0.90-ppg+whisper-Tenor-3_你给我听好_0031.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/1-0.92-ppg+whisper+contentVec-Tenor-3_你给我听好_0031.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>F0CORR</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        1.00
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        -0.44
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.90
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.92
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>F0</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/1-all-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/1-ppg-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/1-ppg+whisper-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/1-ppg+whisper+contentVec-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                </tr>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#2</b>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/4-gt-Tenor-3_爱情转移_0017.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/4--0.22-ppg-Tenor-3_爱情转移_0017.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/4-0.61-ppg+whisper-Tenor-3_爱情转移_0017.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/4-0.68-ppg+whisper+contentVec-Tenor-3_爱情转移_0017.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>F0CORR</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        1.00
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        -0.22
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.61
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.68
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>F0</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/4-all-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/4-ppg-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/4-ppg+whisper-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/4-ppg+whisper+contentVec-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                </tr>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#3</b>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/3-gt-Tenor-6_父亲写的散文诗_0034.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/3--0.16-ppg-Tenor-6_父亲写的散文诗_0034.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/3-0.22-ppg+whisper-Tenor-6_父亲写的散文诗_0034.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio style="width: 280px;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/3-0.77-ppg+whisper+contentVec-Tenor-6_父亲写的散文诗_0034.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>F0CORR</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        1.00
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        -0.16
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.22
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        0.72
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 72px"><b>F0</b></td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/3-all-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/3-ppg-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/3-ppg+whisper-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                    <td style="text-align: center;vertical-align:middle">
+                        <picture controls="controls" style="width: 280px;">
+                            <img src="assets/pics/fpc/3-ppg+whisper+contentVec-f0.png"
+                                alt="Your browser does not support the img element.">
+                        </picture>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p style="color: #e22">
+        <b>Observation</b>: After integrating diverse semantic-features, the trajectories of
+        the melody between
+        converted audios and ground
+        truth are closer. However, we can also find that using only semantic-based features is hard to model melody
+        adequately, appearing the “out of tune” for human hearing. Therefore,
+        introducing explicit melody modeling (such as F0 features) for SVC remains necessary in the present technology
+        context.
+    </p>
+
+    <p>
+        <br><br>
+    </p>
+    <h3>Lyrics Modeling</h3>
+    <p>
+        In this section, we evaluate the lyrics modeling capability of the different semantic-features. Like before, the
+        source audios are from M4Singer and the target singer is Opencpop.
+    </p>
+
+    <div class="table-responsive pt-3">
+        <table class="table table-hover pt-2">
+            <thead>
+                <tr>
+                    <th style="text-align: center"></th>
+                    <th style="text-align: center">Source</th>
+                    <th style="text-align: center">WeNet</th>
+                    <th style="text-align: center">WeNet + Whisper</th>
+                    <th style="text-align: center">WeNet + Whisper + ContentVec</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#1</b>
+                    </td>
+                    <td colspan="4">
+                        这只是刚刚入门接下来你还会会弹琴会写歌会双截棍 <br> zhè zhǐ shì gāng gāng rù mén jiē xià lái nǐ hái
+                        huì huì tán qín huì xiě gē huì shuāng jié gùn
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-7_阳光宅男_0016_gt.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-7_阳光宅男_0016_wenet.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-7_阳光宅男_0016_wenet_whisper.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-7_阳光宅男_0016_wenet_whisper_contentvec.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        这只是刚刚入门接下来你还会弹琴会写歌会<b>上街滚</b> (CER: 18.2%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        这只是<b>当童话吗地</b>下<b>安利啊狗货看清单</b>写<b>报上节归</b> (CER: 81.8%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> 这只是刚刚入门接下来你还会弹琴会写歌会双<b>戒柜</b>
+                        (CER: 13.6%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b>就</b>只是刚刚入门接下来你还会弹琴会写歌会双截棍
+                        (CER: 9.1%)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> zhè zhǐ shì gāng gāng rù mén jiē
+                        xià
+                        lái nǐ hái huì tán qín huì xiě gē huì <b>shàng jiē gǔn</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        zhè zhǐ shì <b>dāng tóng huà ma dì</b> xià <b>ān lì a gǒu huò kàn qīng dān</b> xiě <b>bào shàng
+                            jié
+                            guī</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> zhè zhǐ shì gāng gāng rù mén jiē
+                        xià
+                        lái nǐ hái huì tán qín huì xiě gē huì shuāng <b>jiè guì</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b>jiù</b> zhǐ shì gāng gāng rù mén
+                        jiē
+                        xià lái nǐ hái huì tán qín huì xiě gē huì shuāng jié gùn
+                    </td>
+                </tr>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#2</b>
+                    </td>
+                    <td colspan="4">
+                        我好想对你对你宠爱才短短几个礼拜心情坏因为你不在 <br> wǒ hǎo xiǎng duì nǐ duì nǐ chǒng ài cái duǎn
+                        duǎn jǐ gè lǐ bài xīn qíng huài yīn wèi nǐ bù zài
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-6_宠爱_0022_gt.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-6_宠爱_0022_wenet.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-6_宠爱_0022_wenet_whisper.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-6_宠爱_0022_wenet_whisper_contentvec.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        我好想对你对你宠爱才短短几个礼拜心情<b>会</b>因为你不在 (CER: 4.2%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        <b>同好心愿意</b>爱<b>出</b>爱<b>大胆即刻必败应尽力</b>为你不<b>猜</b> (CER: 90.5%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        我好<b>心</b>对你对你宠爱才<b>等等</b>几个礼拜心情<b>欢意</b>为你不在 (CER: 20.8%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> 我好想对你对你宠爱才短短几个礼拜心情<b>欢意</b>为你不在
+                        (CER: 8.33%)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> wǒ hǎo xiǎng duì nǐ duì nǐ chǒng ài
+                        cái
+                        duǎn duǎn jǐ gè lǐ bài xīn qíng <b>huì</b> yīn wèi nǐ bù zài
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        <b>tóng hào xīn yuàn yì</b> ài <b>chū</b> ài <b>dà dǎn jí kè bì bài yīng jìn lì</b> wèi nǐ bù
+                        <b>cāi</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> wǒ hǎo <b>xīn</b> duì nǐ duì nǐ
+                        chǒng
+                        ài cái <b>děng děng</b> jǐ gè lǐ bài xīn qíng <b>huān yì</b> wèi nǐ bù zài
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> wǒ hǎo xiǎng duì nǐ duì nǐ chǒng ài
+                        cái
+                        duǎn duǎn jǐ gè lǐ bài xīn qíng <b>huān yì</b> wèi nǐ bù zài
+                    </td>
+                </tr>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#3</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px" colspan="4">
+                        夕阳下我拉着你一起望着天天慢的静静的度过旧旧的时间 <br> xī yáng xià wǒ lā zhe nǐ yì qǐ wàng zhe tiān
+                        tiān màn de jìng jìng de dù guò jiù jiù de shí jiān
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-7_少年游_0015_gt.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-7_少年游_0015_wenet.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-7_少年游_0015_wenet_whisper.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Alto-7_少年游_0015_wenet_whisper_contentvec.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        夕阳下<b>午</b>拉着你一起望着天<b>静</b>慢<b>地</b>静静<b>地</b>度过<b>久久</b>的时间 (CER: 24.0%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        <b>心跳不欢声</b>你一<b>切</b>望着天<b>心</b>慢的<b>听见</b>的<b>多古典就失恋</b> (CER: 73.9%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        <b>深夜</b>下<b>午</b>拉着你一起望着天<b>听</b>慢的静静的<b>兜</b>过<b>去</b>的时间 (CER: 29.2%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        夕阳下我拉着你一起望着天<b>给你</b>慢的静静的度过<b>久久</b>的时间 (CER: 15.4%)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> xī yáng xià <b>wǔ</b> lā zhe nǐ yì
+                        qǐ
+                        wàng zhe tiān <b>jìng</b> màn <b>dì</b> jìng jìng <b>dì</b> dù guò <b>jiǔ jiǔ</b> de shí jiān
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        <b>xīn tiào bù huān shēng</b> nǐ yī <b>qiè</b> wàng zhe tiān <b>xīn</b> màn de <b>tīng jiàn</b>
+                        de
+                        <b>duō gǔ diǎn jiù shī liàn</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b>shēn yè</b> xià <b>wǔ</b> lā zhe
+                        nǐ
+                        yì qǐ wàng zhe tiān <b>tīng</b> màn de jìng jìng de <b>dōu</b> guò <b>qù</b> de shí jiān
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> xī yáng xià wǒ lā zhe nǐ yì qǐ wàng
+                        zhe
+                        tiān <b>gěi nǐ</b> màn de jìng jìng de dù guò <b>jiǔ jiǔ</b> de shí jiān
+                    </td>
+                </tr>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#4</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px" colspan="4">
+                        顾不顾将相王侯管不管万世千秋求只求爱化解这万丈红尘纷乱永无休 <br> gù bù gù jiàng xiàng wáng hóu guǎn
+                        bù guǎn wàn shì qiān qiū qiú zhǐ qiú ài huà jiě zhè wàn zhàng hóng chén fēn luàn yǒng wú xiū
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Tenor-1_天下_0010_gt.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Tenor-1_天下_0010_wenet.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Tenor-1_天下_0010_wenet_whisper.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Tenor-1_天下_0010_wenet_whisper_contentvec.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        <b>孤不孤</b>将相<b>望后</b>管不管万世千秋求<b>知</b>求爱化解这万丈红尘纷乱永无休 (CER: 16.7%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        <b>牵挂</b>不<b>顾登场问候问</b>不<b>完把时间救当初仇</b>爱<b>我将</b> (CER: 72.3%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        顾不顾<b>正向往后还</b>不<b>关为师</b>千秋求<b>知</b>求爱化解这万丈红尘纷乱永无休 (CER: 30.0%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        顾不顾<b>长</b>相<b>往后</b>管不管<b>为师</b>千秋求<b>知</b>求爱化解这万丈红尘纷乱永无休 (CER:
+                        20.0%)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b>gū bù gū</b> jiàng xiàng <b>wàng
+                            hòu</b> guǎn bù guǎn wàn shì qiān qiū qiú <b>zhī</b> qiú ài huà jiě zhè wàn zhàng hóng chén
+                        fēn luàn
+                        yǒng wú xiū
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        <b>qiān guà</b> bù <b>gù dēng chǎng wèn hòu wèn</b> bù <b>wán bǎ shí jiān jiù dāng chū chóu</b>
+                        ài
+                        <b>wǒ jiāng</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> gù bù gù <b>zhèng xiàng wǎng hòu
+                            hái</b> bù <b>guān wèi shī</b> qiān qiū qiú <b>zhī</b> qiú ài huà jiě zhè wàn zhàng hóng
+                        chén fēn
+                        luàn yǒng wú xiū
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> gù bù gù <b>zhǎng</b> xiàng <b>wǎng
+                            hòu</b> guǎn bù guǎn <b>wèi shī</b> qiān qiū qiú <b>zhī</b> qiú ài huà jiě zhè wàn zhàng
+                        hóng chén
+                        fēn luàn yǒng wú xiū
+                    </td>
+                </tr>
+                <tr style="background-color: #e7ecec;">
+                    <td style="text-align: left;vertical-align:middle;width: 72px">
+                        <b>#5</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px" colspan="4">
+                        让我断了气铁了心爱的过火一回头就找到出路让我成为了无情的K歌之王<br> ràng wǒ duàn le qì tiě le xīn ài
+                        de guò huǒ yī huí tóu jiù zhǎo dào chū lù ràng wǒ chéng wéi liǎo wú qíng de K gē zhī wáng
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Tenor-3_K歌之王_0022_gt.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Tenor-3_K歌之王_0022_wenet.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Tenor-3_K歌之王_0022_wenet_whisper.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="text-align: center">
+                        <audio controls="controls" style="width: 300px;" preload="auto">
+                            <source src="assets/audios/cer/Tenor-3_K歌之王_0022_wenet_whisper_contentvec.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        让我断了气<b>贴</b>了心<b>态</b>的<b>火</b>火一回头就找到出路让我成为了无情的K<b>哥</b>之王 (CER:
+                        12.5%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        让我<b>等</b>了<b>几天的</b>心<b>拍电话你</b>回头<b>都早老住</b>让我成为了无<b>形</b>的<b>黑洞失望</b>
+                        (CER: 63.3%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        让我断了气<b>贴</b>了心<b>海</b>的<b>火</b>火一回头就找到出路让我成为了无<b>形</b>的<b>配</b>歌<b>时光</b>
+                        (CER: 21.9%)
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        让我断了<b>七天的</b>心<b>海</b>的过火一回头就找到出路让我成为了无情的<b>配</b>歌之王 (CER: 15.6%)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"><b> </b></td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> ràng wǒ duàn le qì <b>tiē</b> le
+                        xīn
+                        <b>tài</b> de <b>huǒ</b> huǒ yī huí tóu jiù zhǎo dào chū lù ràng wǒ chéng wéi liǎo wú qíng de K
+                        <b>gē</b>
+                        zhī wáng
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px">
+                        ràng wǒ <b>děng</b> le <b>jǐ tiān de</b> xīn <b>pāi diàn huà nǐ</b> huí tóu <b>dōu zǎo lǎo
+                            zhù</b>
+                        ràng wǒ chéng wéi liǎo wú <b>xíng</b> de <b>hēi dòng shī wàng</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> ràng wǒ duàn le qì <b>tiē</b> le
+                        xīn
+                        <b>hǎi</b> de <b>huǒ</b> huǒ yī huí tóu jiù zhǎo dào chū lù ràng wǒ chéng wéi liǎo wú
+                        <b>xíng</b> de
+                        <b>pèi</b> gē <b>shí guāng</b>
+                    </td>
+                    <td style="text-align: left;vertical-align:middle;width: 500px"> ràng wǒ duàn le <b>qī tiān de</b>
+                        xīn
+                        <b>hǎi</b> de guò huǒ yī huí tóu jiù zhǎo dào chū lù ràng wǒ chéng wéi liǎo wú qíng de
+                        <b>pèi</b> gē
+                        zhī wáng
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p style="color: #e22">
+        <b>Observation</b>: After integrating diverse semantic-features, the intelligibility
+        of the converted audios has improved.
+    </p>
+
+    <p>
+        <br><br>
+    </p>
+    <h3>Speaker Similarity</h3>
+    <p>
+        Finally, we evalute the speaker similarity for the converted audios.
+    </p>
+    <div class="table-responsive pt-3">
+        <table class="table table-hover pt-2">
+            <thead>
+                <tr>
+                    <th style="text-align: center">Source</th>
+                    <th style="text-align: center">WeNet</th>
+                    <th style="text-align: center">Whisper</th>
+                    <th style="text-align: center">ContentVec</th>
+                    <!-- <th style="text-align: center">WeNet + Whisper</th>
+                    <th style="text-align: center">WeNet + ContentVec</th>
+                    <th style="text-align: center">Whisper + ContentVec</th>
+                    <th style="text-align: center">WeNet + Whisper + ContentVec</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/1-gt-Tenor-3_你给我听好_0031.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\ppg.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\whisper.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\contentvec.wav" />
+                        </audio>
+                    </td>
+                    <!-- <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\ppg+whisper.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\ppg+contentvec.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\whisper+contentvec.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\ppg+whisper+contentvec.wav" />
+                        </audio>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-hover pt-2">
+            <thead>
+                <tr>
+                    <!-- <th style="text-align: center">Source</th>
+                    <th style="text-align: center">WeNet</th>
+                    <th style="text-align: center">Whisper</th>
+                    <th style="text-align: center">ContentVec</th> -->
+                    <th style="text-align: center">WeNet + Whisper</th>
+                    <th style="text-align: center">WeNet + ContentVec</th>
+                    <th style="text-align: center">Whisper + ContentVec</th>
+                    <th style="text-align: center">WeNet + Whisper + ContentVec</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets/audios/fpc/1-gt-Tenor-3_你给我听好_0031.wav" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\ppg.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\whisper.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\contentvec.wav" />
+                        </audio>
+                    </td> -->
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\ppg+whisper.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\ppg+contentvec.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\whisper+contentvec.wav" />
+                        </audio>
+                    </td>
+                    <td style="align-content: center;text-align: center;">
+                        <audio style="width:100%;" controls="controls" preload="auto">
+                            <source src="assets\audios\sim\ppg+whisper+contentvec.wav" />
+                        </audio>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p style="color: #e22">
+        <b>Observation</b>: For different semantic-features, the speaker similarities of them are comparable and hard to
+        rank from human perception.
+    </p>
+
+</div>
+
+</html>

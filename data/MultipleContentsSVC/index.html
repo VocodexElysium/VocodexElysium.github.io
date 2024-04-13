@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+    <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    <title>MultipleContentsSVC Demo Page</title>
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1091.0" data-gr-ext-installed="">
+
+    <div class="container">
+        <header role="banner"></header>
+        <main role="main">
+            <article itemscope itemtype="https://schema.org/BlogPosting">
+
+                <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+                    <div class="text-center">
+                        <h1>Leveraging Content-based Features from Multiple Acoustic Models for Singing Voice
+                            Conversion </h1>
+                        <p class="lead fw-bold">
+                            |<a href="https://arxiv.org/abs/2310.11160" class="bluehref"> Preprint </a>|
+                            <a href="https://github.com/open-mmlab/Amphion/tree/main/egs/svc/MultipleContentsSVC"
+                                class="bluehref"> Code </a>|
+                            <a href="https://huggingface.co/amphion/singing_voice_conversion" class="bluehref">
+                                Pretrained Model </a>|
+                            <a href="https://huggingface.co/spaces/amphion/singing_voice_conversion" class="bluehref">
+                                Huggingface Space </a>|
+                            <a href="https://openxlab.org.cn/apps/detail/Amphion/singing_voice_conversion"
+                                class="bluehref">
+                                OpenXLab App </a>|
+                        </p>
+
+                        <p class="fst-italic mb-0">
+                            <b>
+                                <a href="https://www.zhangxueyao.com/" class="plainhref">Xueyao Zhang</a>, Yicheng Gu,
+                                Haopeng Chen, Zihao
+                                Fang, Lexiao Zou, <a
+                                    href="https://scholar.google.com/citations?user=KNqxVT0AAAAJ&hl=zh-CN"
+                                    class="plainhref">Liumeng Xue</a>,
+                                <a href="https://drwuz.com/" class="plainhref">Zhizheng Wu</a>
+                            </b>
+                        </p>
+                        <p>
+                            School of Data Science, The Chinese University of Hong Kong, Shenzhen
+                        </p>
+                    </div>
+                    <div>
+                        <br><br>
+                        <h3>Overview</h3>
+                    </div>
+                    <p>
+                        Singing voice conversion (SVC) is a technique to enable an arbitrary singer to sing an arbitrary
+                        song. To achieve that, it is important to obtain speaker-agnostic representations from source
+                        audio, which is a challenging task. A common solution is to extract content-based features
+                        (e.g., PPGs) from a pretrained acoustic model. However, the choices for acoustic models are vast
+                        and varied. It is yet to be explored what characteristics of content features from different
+                        acoustic models are, and whether integrating multiple content features can help each other.
+                        This study investigates three distinct content features, sourcing from WeNet, Whisper, and
+                        ContentVec, respectively. We explore their complementary roles in intelligibility, prosody,
+                        and conversion similarity for SVC. By integrating the multiple content features with a
+                        diffusion-based SVC model, our SVC system achieves superior conversion performance on both
+                        objective and subjective evaluation in comparison to a single source of content features.
+                    </p>
+                    <p style="text-align: center;">
+                        <img src="assets/pics/Model.png" width="80%">
+                        <br>
+                        <b>The proposed diffusion-based SVC framework that leverages multiple content
+                            features</b>
+                    </p>
+                    <div>
+                        <br><br>
+                        <h3>Contents</h3>
+                    </div>
+                    <p>
+                    <ul>
+                        <li class="contents"><b>Part 1</b>: <a href="content_features.html">Complementary Roles of
+                                Multiple
+                                Content
+                                Features</a></li>
+                        <li class="contents"><b>Part 2</b>: <a href="performance.html">Performance of Our Proposed SVC
+                                System</a></li>
+                        <li class="contents"><b>Part 3</b>: <a href="vocoder.html">Improvements of Fine-tuning Vocoder
+                                with
+                                Singing Voice
+                                Data</a></li>
+                    </ul>
+                    </p>
+                    <div>
+                        <br><br>
+                        <h3>AI Singers Demo</h3>
+                        <br>
+                    </div>
+                    <p style="text-align: center;" class="cite">
+                        <video width="70%" controls>
+                            <source src="./assets/ai-vocolists.mp4" type="video/mp4">
+                        </video>
+                        <br>
+                        The vocal audios are produced by our proposed SVC system.
+                    </p>
+                </div>
+
+            </article>
+        </main>
+    </div>
+
+</body>
+
+</html>

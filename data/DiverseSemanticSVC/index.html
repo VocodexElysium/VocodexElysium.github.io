@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+    <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    <title>DiverseSemanticSVC Demo Page</title>
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1091.0" data-gr-ext-installed="">
+
+    <div class="container">
+        <header role="banner"></header>
+        <main role="main">
+            <article itemscope itemtype="https://schema.org/BlogPosting">
+
+                <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+                    <div class="text-center">
+                        <h1>Leveraging Diverse Semantic-based Audio Pretrained Models for Singing Voice Conversion</h1>
+                        <p class="lead fw-bold">
+                            |
+                            <a href="" class="bluehref"> Code (Coming Soon) </a>|
+                        </p>
+                    </div>
+                    <div>
+                        <br><br>
+                        <h3>Overview</h3>
+                    </div>
+                    <p>
+                        Singing Voice Conversion (SVC) is a technique that enables any singer to perform any song. To
+                        achieve this, it is essential to obtain speaker-agnostic representations from the source audio,
+                        which poses a significant challenge. A common solution involves utilizing a semantic-based audio
+                        pretrained model as a feature extractor. However, the degree to which the extracted features can
+                        meet the SVC requirements remains an open question. This includes their capability to accurately
+                        model melody and lyrics, the speaker-independency of their underlying acoustic information, and
+                        their robustness for in-the-wild acoustic environments. In this study, we investigate the
+                        knowledge within classical semantic-based pretrained models in much detail. We discover that the
+                        knowledge of different models is diverse and can be complementary for SVC. To jointly utilize
+                        the diverse pretrained models with mismatched time resolutions, we propose an efficient ReTrans
+                        strategy to address the feature fusion problem. Based on the above, we design a Singing Voice
+                        Conversion framework based on Diverse Semantic-based Feature Fusion (DSFF-SVC). Experimental
+                        results demonstrate that DSFF-SVC can be generalized and improve various existing SVC models,
+                        particularly in challenging real-world conversion tasks.
+                    </p>
+                    <p style="text-align: center;">
+                        <img src="assets/pics/dsff-svc.png" width="80%">
+                        <br>
+                        <b>The proposed Singing Voice Conversion framework based on Diverse Semantic-based Features
+                            Fusion (DSFF-SVC).</b>
+                    </p>
+                    <div>
+                        <br><br>
+                        <h3>Contents</h3>
+                    </div>
+                    <p>
+                    <ul>
+                        <li class="contents"><b>Part 1</b>: <a href="content_features.html">Performance of Different
+                                Semantic-based Features (EQ1)</a></li>
+
+                        <li class="contents"><b>Part 2</b>: <a href="performance.html">Performance of the DSFF-SVC
+                                framework (EQ2)</a></li>
+
+                        <li class="contents"><b>Part 3</b>: <a href="vocoder.html">Performance of the Resolution
+                                Transformation based Features Fusion (EQ3)</a></li>
+                    </ul>
+                    </p>
+                </div>
+
+            </article>
+        </main>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+    <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    <title>DiverseSemanticSVC Demo Page</title>
+
+</head>
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h2 id="best-system-samples" style="text-align: center;">
+        Performance of the DSFF-SVC framework
+    </h2>
+
+    <h4>Evaluattion tasks</h4>
+    <ol>
+        <li>
+            <b>Recording Studio Setting:</b> Following the most existing works, we utilize the high-quality singing
+            corpus that is recorded in studio as the experimental data. The vocals are clean with virtually no noise or
+            environmental interference.
+        </li>
+        <li>
+            <b>In-the-Wild Setting:</b> in the real-world SVC application, usually the singing voices are separated from
+            the background music, which will remain some artifacts or reverb in the vocals. We consider this as a more
+            challenging conversion task to examine the robustness of the SVC systems.
+        </li>
+    </ol>
+
+    <h4>Base Models</h4>
+    <ol>
+        <li>
+            <b>TransformerSVC:</b> It adopts a vanilla encoder-only transformer model as the acoustic model. Its output
+            is the mel-spectrogram.
+        </li>
+        <li>
+            <b>VitsSVC:</b> It is a VITS-based model which is similar to the SoftVC-VITS. It is an end-to-end framework
+            and can directly produce waveform.
+        </li>
+        <li>
+            <b>DiffWaveNetSVC:</b> It adopts a diffusion-based acoustic model and could generate mel-spectrogram, which
+            is proposed by. The internal encoder of the diffusion framework is based on Bidirectional Non-Causal Dilated
+            CNN, which is similar to WaveNet.
+        </li>
+    </ol>
+    <p>
+        For following tables, <b>W</b> represents using <i>WeNet</i> feature only, <b>W + W</b> represents using both <i>WeNet</i> and <i>Whisper</i> features, and <b>W + W + C</b> represents using <i>WeNet</i>, <i>Whisper</i> and <i>ContentVec</i> features.
+    </p>
+
+
+    <div class="table-responsive pt-5">
+        <h3>Recording Studio Setting</h3>
+
+        <div class="table-responsive pt-3">
+            <h4>Reference</h4>
+            <audio preload="auto" controls="controls">
+                <source src="assets/audios/ref.wav" type="audio/wav">
+            </audio>
+            <audio preload="auto" controls="controls">
+                <source src="assets/audios/ref2.wav" type="audio/wav">
+            </audio>
+            <audio preload="auto" controls="controls">
+                <source src="assets/audios/ref3.wav" type="audio/wav">
+            </audio>
+        </div>
+
+        <br>
+
+        <div class="table-responsive pt-3">
+            <h4>Conversion Results</h4>
+            <table class="table table-hover pt-2">
+                <thead>
+                    <tr>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">Source</th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W)</th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W)
+                        </th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W + C)
+                        </th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W)</th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W)</th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W + C)</th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W)</th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W)
+                        </th>
+                        <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W + C)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/gt/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/wenet/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/whisper/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/contentvec/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/wenet/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/whisper/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/vits/contentvec/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/wenet/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/whisper/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/diff/contentvec/Soprano-2_告白气球_0012.wav" />
+                            </audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/gt/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/transformer/wenet/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/whisper/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/contentvec/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/wenet/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/whisper/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/contentvec/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/wenet/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/whisper/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/contentvec/Alto-6_宠爱_0022.wav" />
+                            </audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/gt/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/wenet/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/whisper/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/contentvec/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/wenet/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/whisper/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/vits/contentvec/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/wenet/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/whisper/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/diff/contentvec/Tenor-3_K歌之王_0022.wav" />
+                            </audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/gt/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/transformer/wenet/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/whisper/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source
+                                    src="assets/audios/performance/academic/transformer/contentvec/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/wenet/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/whisper/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/vits/contentvec/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/wenet/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/whisper/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                        <td style="width:120px; text-align:center; vertical-align:middle;">
+                            <audio style="width:120px;" controls="controls" preload="auto">
+                                <source src="assets/audios/performance/academic/diff/contentvec/Bass-1_听海_0023.wav" />
+                            </audio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="table-responsive pt-5">
+        <h3>In-the-Wild Setting</h3>
+
+        <div class="table-responsive pt-4">
+            <div class="table-responsive pt-3">
+                <h4>Reference (English Male)</h4>
+                <audio preload="auto" controls="controls">
+                    <source src="assets/audios/performance/wild/john/JohnMayer_Shouldn't Matter but It Does_0020.wav"
+                        type="audio/wav">
+                </audio>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\john\JohnMayer_Wildfire_0009.wav" type="audio/wav">
+                </audio>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\john\JohnMayer_You're Gonna Live Forever in Me_0012.wav"
+                        type="audio/wav">
+                </audio>
+            </div>
+
+            <br>
+
+            <div class="table-responsive pt-3">
+                <h4>Conversion Results</h4>
+                <table class="table table-hover pt-2">
+                    <thead>
+                        <tr>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">Source</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W
+                                + C)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W)</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W)</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W + C)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W
+                                + C)
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets/audios/performance/wild/john/gt/Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/adele/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/adele/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets/audios/performance/wild/john/transformer/adele/contentvec.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/adele/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/adele/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/adele/contentvec.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/adele/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/adele/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/adele/contentvec.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets/audios/performance/wild/john/gt/BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/bruno/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/bruno/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets/audios/performance/wild/john/transformer/bruno/contentvec.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/bruno/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/bruno/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/bruno/contentvec.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/bruno/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/bruno/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/bruno/contentvec.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\john\gt\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/王菲/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/王菲/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/王菲/contentvec.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/王菲/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/王菲/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/王菲/contentvec.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/王菲/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/王菲/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/王菲/contentvec.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\john\gt\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/张学友/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/张学友/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/transformer/张学友/contentvec.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/张学友/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/张学友/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/vits/张学友/contentvec.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/张学友/wenet.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/张学友/whisper.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets/audios/performance/wild/john/diff/张学友/contentvec.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-responsive pt-4">
+            <div class="table-responsive pt-3">
+                <h4>Reference (English Female)</h4>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\taylor\TaylorSwift_If This Was A Movie_0002.wav"
+                        type="audio/wav">
+                </audio>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\taylor\TaylorSwift_I Think He Knows_0004.wav"
+                        type="audio/wav">
+                </audio>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\taylor\TaylorSwift_Never Grow Up_0010.wav"
+                        type="audio/wav">
+                </audio>
+            </div>
+
+            <br>
+
+            <div class="table-responsive pt-3">
+                <h4>Conversion Results</h4>
+                <table class="table table-hover pt-2">
+                    <thead>
+                        <tr>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">Source</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W
+                                + C)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W)</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W)</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W + C)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W
+                                + C)
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\gt\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\vits\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\vits\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\vits\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\diff\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\diff\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\diff\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\gt\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\vits\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\vits\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\vits\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\diff\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\diff\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\diff\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\john\gt\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\taylor\vits\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\taylor\vits\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\vits\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\taylor\diff\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\taylor\diff\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\diff\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\john\gt\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\transformer\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\taylor\vits\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\taylor\vits\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\vits\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\taylor\diff\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\taylor\diff\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\taylor\diff\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-responsive pt-4">
+            <div class="table-responsive pt-3">
+                <h4>Reference (Chinese Male)</h4>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\李健\李健_在每个想你的夜里_0002.wav" type="audio/wav">
+                </audio>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\李健\李健_当有天老去_0010.wav" type="audio/wav">
+                </audio>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\李健\李健_梦一场_0017.wav" type="audio/wav">
+                </audio>
+            </div>
+
+            <br>
+
+            <div class="table-responsive pt-3">
+                <h4>Conversion Results</h4>
+                <table class="table table-hover pt-2">
+                    <thead>
+                        <tr>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">Source</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W
+                                + C)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W)</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W)</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W + C)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W
+                                + C)
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\gt\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\vits\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\vits\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\vits\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\diff\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\diff\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\diff\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\gt\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\transformer\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\vits\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\vits\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\vits\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\diff\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\diff\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\李健\diff\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\john\gt\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\vits\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\vits\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\vits\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\diff\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\diff\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\diff\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\john\gt\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\transformer\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\vits\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\vits\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\vits\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\diff\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\diff\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\李健\diff\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-responsive pt-4">
+            <div class="table-responsive pt-3">
+                <h4>Reference (Chinese Female)</h4>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\那英\那英_离不开_0020.wav" type="audio/wav">
+                </audio>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\那英\那英_出卖_0012.wav" type="audio/wav">
+                </audio>
+                <audio preload="auto" controls="controls">
+                    <source src="assets\audios\performance\wild\那英\那英_出卖_0013.wav" type="audio/wav">
+                </audio>
+            </div>
+
+            <br>
+
+            <div class="table-responsive pt-3">
+                <h4>Conversion Results</h4>
+                <table class="table table-hover pt-2">
+                    <thead>
+                        <tr>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">Source</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">TransformerSVC<br>(W + W
+                                + C)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W)</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W)</th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">VitsSVC<br>(W + W + C)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W)
+                            </th>
+                            <th style="width:120px; text-align:center; vertical-align:middle;">DiffWaveNetSVC<br>(W + W
+                                + C)
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\gt\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\vits\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\vits\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\vits\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\diff\wenet\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\diff\whisper\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\diff\contentvec\张学友_如果愛_0021.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\gt\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\transformer\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\vits\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\vits\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\vits\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\diff\wenet\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\diff\whisper\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source src="assets\audios\performance\wild\那英\diff\contentvec\王菲_旋木_0008.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\john\gt\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\vits\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\vits\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\vits\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\diff\wenet\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\diff\whisper\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\diff\contentvec\BrunoMars_When I Was Your Man_0013.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\john\gt\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\transformer\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\vits\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\vits\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\vits\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\diff\wenet\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\diff\whisper\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                            <td style="width:120px; text-align:center; vertical-align:middle;">
+                                <audio style="width:120px;" controls="controls" preload="auto">
+                                    <source
+                                        src="assets\audios\performance\wild\那英\diff\contentvec\Adele_Someone Like You_0006.wav" />
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
