@@ -141,6 +141,39 @@
     em.highlight {
       color: #e37222;
     }
+
+    /* Caption line with the meaning of each flag. */
+    p.flagline {
+      margin-top: -4px;
+      color: #555555;
+    }
+
+    p.flagline img {
+      height: 24px;
+      width: auto;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    /* Long author lists: show a short version, click to expand. */
+    span.authors .short,
+    span.authors.collapsed .full {
+      display: none;
+    }
+
+    span.authors.collapsed .short {
+      display: inline;
+    }
+
+    a.toggle {
+      display: none;
+      font-size: 14px;
+    }
+
+    span.authors.collapsible a.toggle {
+      display: inline;
+    }
+
   </style>
   <link rel="icon" type="image/png" href="images/music.ico">
   <title>Yicheng Gu</title>
@@ -161,23 +194,24 @@
           </colgroup>
           <tr>
             <td valign="middle">
-              <img src="images/me-icassp.png" height="180px">
+              <img src="images/me-icassp.png" height="243px">
             </td>
             <td valign="middle">
               <p align="left">
-                <name>Yicheng Gu (she / her) <img src="images/finland-pride.png" height="24px" width="29px"> <img
-                    src="images/pride.png" height="24px" width="29px"> <img src="images/kanagawa-pride.jpg"
-                    height="24px" width="29px">
-                  </div>
-                </name>
+                <name>Yicheng Gu (she / her)</name>
+              </p>
+              <p class="flagline">
+                <img src="images/finland-pride.png" alt=""> Love Finland&nbsp;&nbsp;&nbsp;
+                <img src="images/kanagawa-pride.jpg" alt=""> Love Japan&nbsp;&nbsp;&nbsp;
+                <img src="images/pride.png" alt=""> Support Sexual Minorities
               </p>
               <p>
-                Research Scientist, <br>
-                Spellbrush, <br>
-                Akihabara, Tokyo, Japan | San Francisco, California, US
+                Research Scientist, Spellbrush<br>
+                Office: Akihabara, Tokyo, Japan&nbsp;&nbsp;|&nbsp;&nbsp;San Francisco, California, US<br>
+                Remote Working From: Otakaari, Espoo, Finland
               </p>
               <p align=left>
-                Email: <span>yicheng.gu@aalto.fi</span>
+                Email: <span>yicheng.gu@aalto.fi</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>yichenggu@sizigistudios.com</span>
               </p>
               <p align=left>
                 <a href="resume/resume_EN.pdf">Curriculum Vitae</a>
@@ -188,6 +222,12 @@
                 <a href="https://github.com/VocodexElysium"> GitHub </a>
                 &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
                 <a href="https://www.linkedin.com/in/yicheng-gu-792577286/"> LinkedIn</a>
+                <br>
+                <a href="https://www.threads.com/@pupunaama">Threads</a>
+                &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                <a href="https://www.instagram.com/pupunaama/">Instagram</a>
+                &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                <a href="https://bsky.app/profile/pupunaama.bsky.social">Bluesky</a>
               </p>
             </td>
           </tr>
@@ -245,10 +285,19 @@
           </colgroup>
           <tr>
             <td valign="center">
+              2026/09
+            </td>
+            <td valign="center">
+              I engaged in the development of <a href="https://arxiv.org/abs/2609.33757">YuE2</a>, a frontier-quality
+              open-source song generation model.
+            </td>
+          </tr>
+          <tr>
+            <td valign="center">
               2026/06
             </td>
             <td valign="center">
-              I released <a href="https://arxiv.org/abs/2606.25713">PupuJEPA</a>, the SOTA music SSL model based on my
+              I released <a href="https://arxiv.org/abs/2606.25713">PupuM2D</a>, the SOTA music SSL model based on my
               intuition as a music producer.
             </td>
           </tr>
@@ -336,7 +385,7 @@
               2024/07
             </td>
             <td valign="center">
-              Method from my <a href="https://arxiv.org/abs/2311.14957">my first paper</a> is implemented and
+              Method from <a href="https://arxiv.org/abs/2311.14957">my first paper</a> is implemented and
               supported by <a href="https://github.com/NVIDIA/BigVGAN">NVIDIA-BigVGAN 2.0</a>.
             </td>
           </tr>
@@ -372,13 +421,14 @@
               2023/10
             </td>
             <td valign="center">
-              <a href="https://arxiv.org/abs/2310.11160">My first paper</a> about singing voice processing got accepted
+              <a href="https://arxiv.org/abs/2310.11160v1">My first paper</a> about singing voice processing got
+                accepted
               by ML4Audio @ NeurIPS 2023.
             </td>
           </tr>
           <tr>
             <td valign="center">
-              2022/10
+              2022/09
             </td>
             <td valign="center">
               I entered Professor <a href="http://www.drwuz.com/">Zhizheng Wu</a>'s lab as a Research Assistant.
@@ -432,10 +482,10 @@
               <!-- <i>IEEE Transactions on Audio, Speech and Language Processing</i>
               <br> -->
               <a href="https://arxiv.org/abs/2606.25713">Preprint</a> /
-              <a href="https://github.com/sizigi/PupuJEPA">Code</a>
+              <a href="https://github.com/sizigi/PupuM2D">Code</a>
               /
-              <a href="https://www.yichenggu.com/PupuJEPA/">Demo</a> /
-              <a href="https://huggingface.co/spellbrush/PupuJEPA">HuggingFace</a>
+              <a href="https://www.yichenggu.com/PupuM2D/">Demo</a> /
+              <a href="https://huggingface.co/spellbrush/PupuM2D">HuggingFace</a>
               <br>
               <span class="tldr">TL;DR: We propose the SOTA music SSL model based on our intuition as music producers.
               </span>
@@ -494,6 +544,37 @@
           </tr>
           <tr>
             <td valign="center">
+              <span class="tag">submitted</span>&nbsp;&nbsp;
+              <papertitle>YuE2: Unifying Symbolic and Audio Music Generation at Frontier Quality
+              </papertitle>
+              <br>
+              <span class="authors">
+                <span class="short">Ruibin Yuan, Jiahao Pan, Junyan Jiang, …, <span class="underline">Yicheng Gu</span>,
+                  …, Yike Guo</span>
+                <span class="full">
+              Ruibin Yuan, Jiahao Pan, Junyan Jiang, Zhiyue Wu, Ziya Zhou, Jiankai Sun, Yizhi Li, Ge Zhang, <span
+                class="underline">Yicheng Gu</span>, Zeyue Tian, Junyu Dai, Hanfeng Lin, Kai Li, Shangda Wu,
+              Xuanjie Liu, Jiaming Wang, Zihan Liu, Yue Wang, Yinghao Ma, Hanzhi Yin, Kangrui Chen, Xinyue Zhang,
+              Ziyang Ma, Mengqi Liao, Hejia Zhao, Guowei Huang, Chao Yan, Lei Ke, Jianwei Yu, Bei Liu, Joe Guo, <a
+                class="black" href="https://scholar.google.com/citations?user=KNqxVT0AAAAJ&hl=zh-CN">Liumeng Xue</a>,
+              Gus Xia, Wei Xue, Yike Guo
+                </span>
+                <a href="#" class="toggle">[+30 more]</a>
+              </span>
+              <br>
+              <a href="https://arxiv.org/abs/2609.33757">Preprint</a> /
+              <a href="https://github.com/multimodal-art-projection/YuE">Code</a> /
+              <a href="https://map-yue2.github.io/">Demo</a> /
+              <a href="https://huggingface.co/m-a-p/YuE2-3B">HuggingFace</a>
+              <br>
+              <span class="tldr">TL;DR: We propose a frontier-quality song generator that writes a symbolic score before
+                rendering
+                audio.
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td valign="center">
               <!-- <span class="tag">ML4Audio @ NeurIPS 2023</span>&nbsp;&nbsp; -->
               <span class="tag">SLT 2024</span>&nbsp;&nbsp;
               <papertitle>
@@ -504,16 +585,27 @@
                 <img src="https://img.shields.io/github/stars/open-mmlab/Amphion?color=success&logo=github">
               </a>
               <br>
+              <span class="authors">
+                <span class="short"><a class="black" href="https://www.zhangxueyao.com/">Xueyao Zhang</a>*, <a
+                  class="black" href="https://scholar.google.com/citations?user=KNqxVT0AAAAJ&hl=zh-CN">Liumeng Xue</a>*,
+                  <span class="underline">Yicheng Gu</span>*, <a class="black"
+                  href="https://scholar.google.com/citations?user=60uamz4AAAAJ&hl=en&oi=sra">Yuancheng Wang</a>*, Jiaqi
+                  Li*, …, <a class="black" href="https://drwuz.com/">Zhizheng Wu</a> (*: Equal Contribution)</span>
+                <span class="full">
               <a class="black" href="https://www.zhangxueyao.com/">Xueyao Zhang</a>*, <a class="black"
                 href="https://scholar.google.com/citations?user=KNqxVT0AAAAJ&hl=zh-CN">Liumeng Xue</a>*, <span
                 class="underline">Yicheng Gu</span>*, <a class="black"
                 href="https://scholar.google.com/citations?user=60uamz4AAAAJ&hl=en&oi=sra">Yuancheng
-                Wang</a>*, Haorui He, Chaoren Wang, Xi Chen, Zihao Fang, Haopeng Chen, Junan Zhang, Tze Ying Tang,
-              Lexiao Zou, Mingxuan Wang, <a class="black" href="https://stevenhan1991.github.io/">Jun Han</a>, <a
+                Wang</a>*, Jiaqi Li*, Haorui He, Chaoren Wang, Songting Liu, Xi Chen, Junan Zhang, Zihao Fang,
+              Haopeng Chen, Tze Ying Tang, Lexiao Zou, Mingxuan Wang, <a class="black"
+                href="https://stevenhan1991.github.io/">Jun Han</a>, <a
                 class="black" href="https://chenkai.site/">Kai
                 Chen</a>, <a class="black" href="https://www.colips.org/~eleliha/">Haizhou Li</a>, <a class="black"
                 href="https://drwuz.com/">Zhizheng
                 Wu</a> (*: Equal Contribution)
+                </span>
+                <a href="#" class="toggle">[+13 more]</a>
+              </span>
               <br>
               <i>IEEE Spoken Language Technology Workshop 2024</i>
               <br>
@@ -534,10 +626,18 @@
                 Generation
               </papertitle>
               <br>
-              Haorui he*, Zengqiang Shang*, Chaoren Wang*, Xuyuan Li*, <span class="underline">Yicheng Gu</span>,
+              <span class="authors">
+                <span class="short">Haorui He*, Zengqiang Shang*, Chaoren Wang*, Xuyuan Li*, <span
+                  class="underline">Yicheng Gu</span>, …, <a class="black" href="https://drwuz.com/">Zhizheng Wu</a> (*:
+                  Equal Contribution)</span>
+                <span class="full">
+              Haorui He*, Zengqiang Shang*, Chaoren Wang*, Xuyuan Li*, <span class="underline">Yicheng Gu</span>,
               Hua Hua, Liwei Liu, Chen Yang, Jiaqi Li, Peiyang Shi, Yuancheng Wang, <a class="black"
                 href="https://chenkai.site/">Kai Chen</a>, Pengyuan Zhang, <a class="black"
                 href="https://drwuz.com/">Zhizheng Wu</a> (*: Equal Contribution)
+                </span>
+                <a href="#" class="toggle">[+8 more]</a>
+              </span>
               <br>
               <i>IEEE Spoken Language Technology Workshop 2024</i>
               <br>
@@ -557,14 +657,22 @@
               <papertitle>Emilia: A Large-Scale, Extensive, Multilingual, and Diverse Dataset for Speech Generation
               </papertitle>
               <br>
-              Haorui he*, Zengqiang Shang*, Chaoren Wang*, Xuyuan Li*, <span class="underline">Yicheng Gu</span>,
+              <span class="authors">
+                <span class="short">Haorui He*, Zengqiang Shang*, Chaoren Wang*, Xuyuan Li*, <span
+                  class="underline">Yicheng Gu</span>, …, <a class="black" href="https://drwuz.com/">Zhizheng Wu</a> (*:
+                  Equal Contribution)</span>
+                <span class="full">
+              Haorui He*, Zengqiang Shang*, Chaoren Wang*, Xuyuan Li*, <span class="underline">Yicheng Gu</span>,
               Hua Hua, Liwei Liu, Chen Yang, Jiaqi Li, Peiyang Shi, Yuancheng Wang, <a class="black"
                 href="https://chenkai.site/">Kai Chen</a>, Pengyuan Zhang, <a class="black"
                 href="https://drwuz.com/">Zhizheng Wu</a> (*: Equal Contribution)
+                </span>
+                <a href="#" class="toggle">[+8 more]</a>
+              </span>
               <br>
               <i>IEEE Transactions on Audio, Speech and Language Processing</i>
               <br>
-              <a href="https://arxiv.org/abs/2407.05361">Preprint</a> /
+              <a href="https://arxiv.org/abs/2501.15907">Preprint</a> /
               <a href="https://github.com/open-mmlab/Amphion/tree/main/preprocessors/Emilia">Code</a> /
               <!-- <a href="data/HAT/slides.pdf">Slides</a> / -->
               <a href="https://emilia-dataset.github.io/Emilia-Demo-Page/">Demo</a> /
@@ -582,7 +690,9 @@
               <br>
               Yiming Zhang, <span class="underline">Yicheng Gu</span>,
               <a class="black" href="https://zengyh1900.github.io/">Yanhong Zeng</a>, Zhening Xing,
-              <a class="black" href="https://drwuz.com/">Zhizheng Wu</a>,
+              <a class="black" href="https://scholar.google.com/citations?user=60uamz4AAAAJ&hl=en&oi=sra">Yuancheng
+                Wang</a>,
+              <a class="black" href="https://drwuz.com/">Zhizheng Wu</a>, Bin Liu,
               <a class="black" href="https://chenkai.site/">Kai Chen</a>
               <br>
               <i>International Journal of Computer Vision</i>
@@ -604,13 +714,13 @@
               </papertitle>
               <br>
               <span class="underline">Yicheng Gu</span>, Chaoren Wang, <a class="black"
-                href="https://drwuz.com/">Zhizheng Wu</a>, Lauri Juvela.
+                href="https://drwuz.com/">Zhizheng Wu</a>, Lauri Juvela
               <br>
               <i>Conference of the International Speech Communication Association 2025 </i>
               <br>
               <a href="https://arxiv.org/abs/2505.15368">Preprint</a> /
               <a href="https://github.com/open-mmlab/Amphion">Code</a> /
-              <a href="https://neurodyne-demo.github.io/">Demo</a>
+              <a href="https://www.yichenggu.com/Neurodyne/">Demo</a>
               <br>
               <span class="tldr">TL;DR: We propose the SOTA Neural Autotune benchmarking against Melodyne.
               </span>
@@ -624,13 +734,13 @@
               </papertitle>
               <br>
               <span class="underline">Yicheng Gu</span>, Runsong Zhang, Lauri Juvela, <a class="black"
-                href="https://drwuz.com/">Zhizheng Wu</a>.
+                href="https://drwuz.com/">Zhizheng Wu</a>
               <br>
               <i>International Conference on Digital Audio Effects 2025 </i>
               <br>
               <a href="https://arxiv.org/abs/2504.04589">Preprint</a> /
               <a href="https://huggingface.co/datasets/amphion/Diff-SSL-G-Comp">HuggingFace</a> /
-              <a href="https://www.yichenggu.com/DiffSSLGComp/">Demo</a>
+              <a href="https://www.yichenggu.com/SolidStateBusComp/">Demo</a>
               <br>
               <span class="tldr">TL;DR: We propose the first large-scale and diverse dataset for Virtual Analog
                 Modeling.
@@ -639,7 +749,26 @@
           </tr>
           <tr>
             <td valign="center">
-              <span class="tag">ICASSP2026</span>&nbsp;&nbsp;
+              <span class="tag">submitted</span>&nbsp;&nbsp;
+              <papertitle>MIDIBack: Harmony-Aware Singing Pitch Correction via Joint Vocal-Accompaniment Symbolic
+                Modeling
+              </papertitle>
+              <br>
+              Joaquim Cavalcante, <span class="underline">Yicheng Gu</span>, Adriel Trajano, Yuri de Malheiros, Thais
+              Gaudencio
+              <br>
+              <a href="https://arxiv.org/abs/2609.28008">Preprint</a> /
+              <a href="https://midiback.joaquimbreno.com/">Demo</a>
+              <br>
+              <span class="tldr">TL;DR: We propose a harmony-aware singing pitch correction model using vocal and
+                accompaniment
+                notes.
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td valign="center">
+              <span class="tag">ICASSP 2026</span>&nbsp;&nbsp;
               <papertitle>Nord-Parl-TTS: Finnish and Swedish TTS Dataset from Parliament Speech
               </papertitle>
               <br>
@@ -650,7 +779,7 @@
               <br>
               <a href="https://arxiv.org/abs/2509.17988">Preprint</a> /
               <a href="https://gryffindorli.github.io/nord-parl-tts-demo/">Demo</a> /
-              <a href="https://huggingface.co/datasets/Aalto-Speech-Synthesis/Nord-Parl-TTS">HuggingFace</a> /
+              <a href="https://huggingface.co/datasets/Aalto-Speech-Synthesis/Nord-Parl-TTS">HuggingFace</a>
               <br>
               <span class="tldr">TL;DR: We propose an Extensive, Multilingual, and Diverse TTS dataset for Nordic
                 languages.
@@ -692,7 +821,7 @@
               <br>
               <i>Machine Learning for Audio Workshop (ML4Audio) at NeurIPS 2023 </i>
               <br>
-              <a href="https://arxiv.org/pdf/2310.11160.pdf">Paper</a> /
+              <a href="https://arxiv.org/pdf/2310.11160v1">Paper</a> /
               <a href="https://github.com/open-mmlab/Amphion/tree/main/egs/svc/MultipleContentsSVC">Code</a> /
               <!-- <a href="data/HAT/slides.pdf">Slides</a> / -->
               <a href="data/MultipleContentsSVC/index.html">Demo</a> /
@@ -764,12 +893,50 @@
               2026-2028
             </td>
             <td>
-              Master student in Speech and Language Technology, supervised by my friend
+              Master student in Sound in New Media, working with my friend
+              <a href="https://scholar.google.co.jp/citations?user=q7-khVcAAAAJ&hl=fi">Prof. Lauri Juvela</a>
+              <br>
+              <span><a href="https://www.aalto.fi/en/school-of-arts-design-and-architecture">School of Arts, Design and
+                  Architecture</a>, <a href="https://www.aalto.fi/en">Aalto University, Espoo, Finland
+                </a></span>
+            </td>
+          </tr>
+        </table>
+        <table width="100%" align="center" border="0" cellpadding="12" style="table-layout:fixed;">
+          <colgroup>
+            <col span="1" style="width: 23%;">
+            <col span="1" style="width: 77%;">
+          </colgroup>
+          <tr>
+            <td valign="center">
+              2026-2028
+            </td>
+            <td>
+              Master student in Acoustics and Audio Technology, working with my friend
+              <a href="https://scholar.google.co.jp/citations?user=q7-khVcAAAAJ&hl=fi">Prof. Lauri Juvela</a>
+              <br>
+              <span><a href="https://www.aalto.fi/en/aalto-acoustics-lab">Aalto Acoustics Lab</a>, <a
+                  href="https://www.aalto.fi/en">Aalto University, Espoo, Finland
+                </a></span>
+            </td>
+          </tr>
+        </table>
+        <table width="100%" align="center" border="0" cellpadding="12" style="table-layout:fixed;">
+          <colgroup>
+            <col span="1" style="width: 23%;">
+            <col span="1" style="width: 77%;">
+          </colgroup>
+          <tr>
+            <td valign="center">
+              2026-2028
+            </td>
+            <td>
+              Master student in Speech and Language Technology, working with my friend
               <a href="https://scholar.google.co.jp/citations?user=q7-khVcAAAAJ&hl=fi">Prof. Lauri Juvela</a>
               <br>
               <span><a
                   href="https://www.aalto.fi/en/department-of-information-and-communications-engineering">Department of
-                  lnformation and Communications Engineering (DICE)</a>, <a href="https://www.aalto.fi/en">Aalto
+                  Information and Communications Engineering (DICE)</a>, <a href="https://www.aalto.fi/en">Aalto
                   University, Espoo, Finland
                 </a></span>
             </td>
@@ -785,7 +952,7 @@
               2024-2025
             </td>
             <td>
-              Exchange student in Computer Science, supervised by my friend
+              Exchange student in Computer Science, working with my friend
               <a href="https://scholar.google.co.jp/citations?user=q7-khVcAAAAJ&hl=fi">Prof. Lauri Juvela</a>
               <br>
               <span><a href="https://www.aalto.fi/en/school-of-science">School of Science</a>, <a
@@ -849,7 +1016,7 @@
           </colgroup>
           <tr>
             <td valign="center">
-              <b>Aalto Univeristy</b>
+              <b>Aalto University</b>
             </td>
             <td>
               Visiting Scholar, @Espoo, Finland (2024/09 ~ 2025/06)
@@ -921,7 +1088,7 @@
             <td>
               Conferences:
               <ul>
-                <li>ICASSP 2025, 2026</li>
+                <li>ICASSP 2025, 2026, 2027</li>
                 <li>Interspeech 2026</li>
                 <li>ICLR 2025</li>
                 <li>IJCNN 2025, 2026, 2027</li>
@@ -1046,6 +1213,22 @@
       </td>
     </tr>
   </table>
+  <script>
+    // Collapse long author lists; the full list stays visible without JavaScript.
+    document.querySelectorAll("span.authors").forEach(function (el) {
+      var toggle = el.querySelector(".toggle");
+      var more = toggle.textContent;
+      el.classList.add("collapsible", "collapsed");
+      toggle.setAttribute("role", "button");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        var collapsed = el.classList.toggle("collapsed");
+        toggle.textContent = collapsed ? more : "[show less]";
+        toggle.setAttribute("aria-expanded", String(!collapsed));
+      });
+    });
+  </script>
 </body>
 
 </html>
