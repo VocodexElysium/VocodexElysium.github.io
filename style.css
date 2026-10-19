@@ -263,7 +263,8 @@ td[valign="center"]:first-child:not(:only-child) {
   vertical-align: top;
 }
 
-/* Keep the Amphion stars badge from making its line taller than the others. */
+/* Keep the Amphion stars badge inside its line, so that line is never taller than the others. */
 #about + table p img {
-  vertical-align: middle;
+  height: 18px;
+  vertical-align: -3px;
 }
