@@ -1,0 +1,250 @@
+/* Color scheme stolen from Sergey Karayev */
+
+span.tag {
+  font-size: 11px;
+  color: #FFFFFF;
+  /* color: #07889b; */
+  background-color: #0076DF;
+  box-shadow: 2px 2px 1px #E0E0E0;
+  padding: 1px 5px 2px 5px;
+}
+
+a {
+  color: #1772d0;
+  /* color: #07889b; */
+  text-decoration: none;
+}
+
+a.black {
+  color: #000000;
+  /* color: #07889b; */
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  /* color: #e37222; #f09228; */
+  color: rgb(180, 16, 44);
+  text-decoration: none;
+}
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 16px
+}
+
+strong {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+heading {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 22px;
+  /* color: #e3225c; */
+  color: rgb(180, 16, 44);
+  /* color: rgb(117, 15, 109); */
+}
+
+subheading {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 18px;
+  font-style: italic;
+  /* color: #e3225c; */
+  color: rgb(180, 16, 44);
+}
+
+papertitle {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+name {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 32px;
+}
+
+.footer {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  opacity: 0.75;
+  color: #777;
+}
+
+.one {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.two {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+.fade {
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+span.highlight {
+  background-color: #ffffd0;
+}
+
+span.artifact {
+  color: #6cb41b;
+  padding: 1px;
+}
+
+span.underline {
+  border-bottom: 1px solid black;
+  padding-bottom: 1px;
+}
+
+span.tldr {
+  color: #555555;
+}
+
+em.highlight {
+  color: #e37222;
+}
+
+/* Caption line with the meaning of each flag. */
+p.flagline {
+  margin-top: -4px;
+  color: #555555;
+}
+
+p.flagline img {
+  height: 24px;
+  width: auto;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* Long author lists: show a short version, click to expand. */
+span.authors .short,
+span.authors.collapsed .full {
+  display: none;
+}
+
+span.authors.collapsed .short {
+  display: inline;
+}
+
+a.toggle {
+  display: none;
+  font-size: 14px;
+}
+
+span.authors.collapsible a.toggle {
+  display: inline;
+}
+
+/* Sticky top bar with links to each page. */
+html {
+  scroll-behavior: smooth;
+  /* Reserve the scrollbar's space on short pages too, so the layout doesn't shift between pages. */
+  scrollbar-gutter: stable;
+}
+
+div.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-width: 976px;
+  margin: -8px -8px 16px -8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid #e6e8eb;
+}
+
+div.topbar div.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 936px;
+  height: 52px;
+  margin: 0 auto;
+}
+
+div.topbar a.home {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  font-weight: bold;
+}
+
+div.topbar a.home img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+div.topbar nav a {
+  margin-left: 22px;
+  font-size: 15px;
+  color: #666666;
+}
+
+div.topbar nav a:hover,
+div.topbar nav a.on {
+  color: #000000;
+}
+
+table[id] {
+  scroll-margin-top: 60px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Photo with rounded corners; its height is matched to the text next to it by the script below. */
+img.photo {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Icons in front of the profile links. */
+p.links a {
+  margin-right: 20px;
+  white-space: nowrap;
+}
+
+p.links svg {
+  width: 15px;
+  height: 15px;
+  margin-right: 6px;
+  vertical-align: -2px;
+  fill: #8c929a;
+}
+
+p.links a:hover svg,
+p.links a:focus svg {
+  fill: currentColor;
+}
+
+/* Dates and labels line up with the first line of their entry. */
+td[valign="center"]:first-child:not(:only-child) {
+  vertical-align: top;
+}
+
+/* Keep the Amphion stars badge from making its line taller than the others. */
+#about + table p img {
+  vertical-align: middle;
+}
