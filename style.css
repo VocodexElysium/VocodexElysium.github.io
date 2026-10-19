@@ -152,7 +152,7 @@ span.authors.collapsible a.toggle {
   display: inline;
 }
 
-/* Sticky top bar with links to each page. */
+/* Sticky top bar: name and pages on the left, sections of the current page on the right. */
 html {
   scroll-behavior: smooth;
   /* Reserve the scrollbar's space on short pages too, so the layout doesn't shift between pages. */
@@ -191,6 +191,25 @@ div.topbar a.home img {
   width: 16px;
   height: 16px;
   margin-right: 8px;
+}
+
+div.topbar div.left {
+  display: flex;
+  align-items: center;
+}
+
+/* A thin divider separates the name from the page links. */
+div.topbar nav.pages {
+  display: flex;
+  align-items: center;
+  height: 18px;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 1px solid #dcdcdc;
+}
+
+div.topbar nav.pages a:first-child {
+  margin-left: 0;
 }
 
 div.topbar nav a {

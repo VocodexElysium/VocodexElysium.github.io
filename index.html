@@ -146,11 +146,18 @@
   <!-- Top Bar Begin -->
   <div class="topbar">
     <div class="inner">
-      <a class="home" href="./"><img src="images/music.ico" alt="">Yicheng Gu</a>
-      <nav>
-        <a href="./" class="on" aria-current="page">Main</a>
-        <a href="researcher.html">Researcher</a>
-        <a href="artist.html">Artist</a>
+      <div class="left">
+        <a class="home" href="./"><img src="images/music.ico" alt="">Yicheng Gu</a>
+        <nav class="pages" aria-label="Pages">
+          <a href="./" class="on" aria-current="page">Main</a>
+          <a href="researcher.html">Researcher</a>
+          <a href="artist.html">Artist</a>
+        </nav>
+      </div>
+      <nav class="sections" aria-label="Sections">
+        <a href="#about">About</a>
+        <a href="#milestones">Milestones</a>
+        <a href="#education">Education</a>
       </nav>
     </div>
   </div>
@@ -622,21 +629,7 @@
       </td>
     </tr>
   </table>
-  <script>
-    // Match the photo height to the text next to it.
-    function fitPhoto() {
-      var photo = document.querySelector("img.photo");
-      var cell = photo.parentNode.nextElementSibling;
-      var paragraphs = cell.getElementsByTagName("p");
-      var top = cell.getElementsByTagName("name")[0].getBoundingClientRect().top;
-      var bottom = paragraphs[paragraphs.length - 1].getBoundingClientRect().bottom;
-      photo.style.height = Math.round(bottom - top) + "px";
-    }
-    window.addEventListener("load", fitPhoto);
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(fitPhoto);
-    }
-  </script>
+  <script src="site.js"></script>
 </body>
 
 </html>

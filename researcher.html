@@ -44,11 +44,18 @@
   <!-- Top Bar Begin -->
   <div class="topbar">
     <div class="inner">
-      <a class="home" href="./"><img src="images/music.ico" alt="">Yicheng Gu</a>
-      <nav>
-        <a href="./">Main</a>
-        <a href="researcher.html" class="on" aria-current="page">Researcher</a>
-        <a href="artist.html">Artist</a>
+      <div class="left">
+        <a class="home" href="./"><img src="images/music.ico" alt="">Yicheng Gu</a>
+        <nav class="pages" aria-label="Pages">
+          <a href="./">Main</a>
+          <a href="researcher.html" class="on" aria-current="page">Researcher</a>
+          <a href="artist.html">Artist</a>
+        </nav>
+      </div>
+      <nav class="sections" aria-label="Sections">
+        <a href="#publications">Publications</a>
+        <a href="#experience">Experience</a>
+        <a href="#services">Services</a>
       </nav>
     </div>
   </div>
@@ -655,22 +662,7 @@
       </td>
     </tr>
   </table>
-  <script>
-    // Collapse long author lists; the full list stays visible without JavaScript.
-    document.querySelectorAll("span.authors").forEach(function (el) {
-      var toggle = el.querySelector(".toggle");
-      var more = toggle.textContent;
-      el.classList.add("collapsible", "collapsed");
-      toggle.setAttribute("role", "button");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.addEventListener("click", function (e) {
-        e.preventDefault();
-        var collapsed = el.classList.toggle("collapsed");
-        toggle.textContent = collapsed ? more : "[show less]";
-        toggle.setAttribute("aria-expanded", String(!collapsed));
-      });
-    });
-  </script>
+  <script src="site.js"></script>
 </body>
 
 </html>
