@@ -6,6 +6,11 @@ on:
   schedule:
     - cron: "23 5 * * *" # every day at 05:23 UTC
   workflow_dispatch:
+    inputs:
+      again:
+        description: "Read the counts again even if they were already read today"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -16,8 +21,16 @@ concurrency:
 
 jobs:
   update:
+    # Google Scholar turns away some of GitHub's machines. So the job runs four times, one after the other
+    # and each time on another machine. Once one of them has read the counts, the later ones do nothing.
+    name: Try ${{ matrix.try }}
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        try: [1, 2, 3, 4]
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - name: Check out the script
         uses: actions/checkout@v7
@@ -29,9 +42,9 @@ jobs:
           path: stats
 
       - name: Read the counts from Google Scholar
-        run: python3 .github/scripts/update_citations.py stats/citations.json
+        run: python3 .github/scripts/update_citations.py stats/citations.json ${{ inputs.again && '--again' || '' }}
 
-      - name: Save the counts if they changed
+      - name: Save the counts
         working-directory: stats
         run: |
           if git diff --quiet; then
@@ -40,5 +53,5 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit --quiet --all --message "Update citation counts"
+          git commit --quiet --all --message "Citation counts read on $(date -u +%F)"
           git push --quiet
