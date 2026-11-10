@@ -5,3 +5,5 @@
 
 It is refreshed once a day by the workflow `.github/workflows/scholar-citations.yml` on the `main` branch,
 which runs `.github/scripts/update_citations.py`. Please don't edit it by hand.
+
+`updated` is the day the counts last changed; `checked` is the day they were last read from Google Scholar.
