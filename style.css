@@ -172,9 +172,28 @@ p.links a:focus svg {
   vertical-align: -3px;
 }
 
+/* ---------- Projects (Researcher page) ---------- */
+
+/* The row of badges under each project title, like the badges under a GitHub README title. */
+img.badge {
+  height: 20px;
+  margin: 3px 0;
+  vertical-align: -4px;
+}
+
 /* ---------- Publications (Researcher page) ---------- */
 
+/* Group titles inside the section: journal articles, conference papers, preprints. */
+subheading {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Raised by 2px so that the tag is centred on the capital letters of the title next to it. */
 span.tag {
+  position: relative;
+  top: -2px;
   font-size: 11px;
   color: #FFFFFF;
   background-color: #0076DF;
