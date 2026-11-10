@@ -58,7 +58,9 @@ def fetch(url):
         raise Refused(str(error) or type(error).__name__) from error
     page = body.decode("utf-8", "replace")
     if ROW not in page:
-        raise Refused("the page has no publication rows, probably a robot check")
+        title = re.search(r"<title[^>]*>(.*?)</title>", page, re.DOTALL | re.IGNORECASE)
+        title = " ".join(title.group(1).split())[:80] if title else "no title"
+        raise Refused(f'the page "{title}" has no publication rows, probably a robot check')
     return page
 
 
