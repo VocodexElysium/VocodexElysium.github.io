@@ -1,16 +1,14 @@
-# Refreshes the citation counts shown on the Researcher page once a day.
+# Refreshes the citation counts shown on the Researcher page.
 # The counts live in citations.json on the scholar-stats branch; the citation badges read that file.
+#
+# Once a day this asks Google Scholar for the profile page. Scholar turns away many of GitHub's machines;
+# on such a day the counts simply stay as they are and the next day's run asks again.
 name: Update citation counts
 
 on:
   schedule:
     - cron: "23 5 * * *" # every day at 05:23 UTC
   workflow_dispatch:
-    inputs:
-      again:
-        description: "Read the counts again even if they were already read today"
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -21,14 +19,6 @@ concurrency:
 
 jobs:
   update:
-    # Google Scholar turns away some of GitHub's machines. So the job runs four times, one after the other
-    # and each time on another machine. Once one of them has read the counts, the later ones do nothing.
-    name: Try ${{ matrix.try }}
-    strategy:
-      max-parallel: 1
-      fail-fast: false
-      matrix:
-        try: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -41,8 +31,8 @@ jobs:
           ref: scholar-stats
           path: stats
 
-      - name: Read the counts from Google Scholar
-        run: python3 .github/scripts/update_citations.py stats/citations.json ${{ inputs.again && '--again' || '' }}
+      - name: Ask Google Scholar for the counts
+        run: python3 .github/scripts/update_citations.py stats/citations.json
 
       - name: Save the counts
         working-directory: stats

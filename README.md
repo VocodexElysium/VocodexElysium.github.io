@@ -10,6 +10,7 @@
 
 All pages share `style.css` and `site.js`. The design is based on [Jon Barron's template](https://jonbarron.info/).
 
-The citation counts on the Researcher page refresh once a day: the workflow in
-`.github/workflows/scholar-citations.yml` reads them from Google Scholar and stores them in `citations.json` on the
-`scholar-stats` branch, which the citation badges display.
+The citation counts on the Researcher page refresh by themselves: once a day the workflow in
+`.github/workflows/scholar-citations.yml` asks Google Scholar for them and stores them in `citations.json` on the
+`scholar-stats` branch, which the citation badges display. Scholar does not answer GitHub's machines every day, so
+the counts can be a few days behind.

@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 """Refresh the citation counts shown on the Researcher page.
 
-Reads the Google Scholar profile, picks out the papers listed in PAPERS and writes their "Cited by" counts
-to a JSON file. The citation badges on the Researcher page read that file.
+Asks Google Scholar for the profile page, picks out the papers listed in PAPERS and writes their "Cited by"
+counts to a JSON file. The citation badges on the Researcher page read that file.
 
-Usage: update_citations.py <citations.json> [--again]
+Usage: update_citations.py <citations.json>
 
-The counts are read once a day; --again reads them even if that already happened today.
-
-Google Scholar turns away some of GitHub's machines, so the workflow runs this script several times in a
-row, each time on another machine. Being turned away is therefore not an error, unless nothing has got
-through for STALE_DAYS days.
+The request says openly that it comes from a script, and it asks for a page that Scholar's robots.txt allows.
+Google Scholar turns away many of GitHub's machines all the same (HTTP 403). The counts then stay as they
+are and the next day's run asks again; the script makes no attempt to get around a refusal. Only when no
+answer has come for STALE_DAYS days does it fail, so that GitHub sends a notice.
 """
-import argparse
 import datetime
 import gzip
 import http.client
@@ -35,13 +33,12 @@ PAPERS = {
 MOST_CITED = f"https://scholar.google.com/citations?user={USER}&hl=en"
 NEWEST = MOST_CITED + "&sortby=pubdate"
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
+    "User-Agent": "citation-count-updater/1.0 (automated script; reads one public profile page a day)",
     "Accept-Language": "en-US,en;q=0.9",
     "Accept-Encoding": "gzip",
 }
 ROW = '<tr class="gsc_a_tr">'
-# Without an answer from Scholar for this many days, the run fails, so that GitHub sends a notice.
-STALE_DAYS = 14
+STALE_DAYS = 30
 
 
 class Refused(Exception):
@@ -85,21 +82,15 @@ def read_counts():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Refresh the citation counts shown on the Researcher page.")
-    parser.add_argument("target", help="the JSON file that holds the counts")
-    parser.add_argument("--again", action="store_true", help="read the counts even if they were already read today")
-    options = parser.parse_args()
-
+    if len(sys.argv) != 2:
+        sys.exit("Usage: update_citations.py <citations.json>")
+    target = sys.argv[1]
     today = datetime.datetime.now(datetime.timezone.utc).date()
     try:
-        with open(options.target, encoding="utf-8") as file:
+        with open(target, encoding="utf-8") as file:
             previous = json.load(file)
     except FileNotFoundError:
         previous = {}
-
-    if previous.get("checked") == today.isoformat() and not options.again:
-        print("The counts were already read today.")
-        return 0
 
     try:
         counts = read_counts()
@@ -110,7 +101,8 @@ def main():
             print(f"::error::Google Scholar has not answered for {days} days ({problem}). "
                   "The citation counts on the site may be out of date.")
             return 1
-        print(f"::notice::Google Scholar turned this machine away ({problem}). The citation counts stay as they are.")
+        print(f"::notice::Google Scholar turned this machine away ({problem}). "
+              "The citation counts stay as they are; the next run asks again.")
         return 0
 
     for key, count in counts.items():
@@ -124,7 +116,7 @@ def main():
     changed = any(previous.get(key) != count for key, count in counts.items())
     # "updated" is the day the counts last changed, "checked" the day they were last read.
     updated = today.isoformat() if changed else previous.get("updated", today.isoformat())
-    with open(options.target, "w", encoding="utf-8") as file:
+    with open(target, "w", encoding="utf-8") as file:
         json.dump({**counts, "updated": updated, "checked": today.isoformat()}, file, indent=2)
         file.write("\n")
     print("Updated:" if changed else "No change:", counts)
