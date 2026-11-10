@@ -1,0 +1,44 @@
+# Refreshes the citation counts shown on the Researcher page once a day.
+# The counts live in citations.json on the scholar-stats branch; the citation badges read that file.
+name: Update citation counts
+
+on:
+  schedule:
+    - cron: "23 5 * * *" # every day at 05:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: citation-counts
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the script
+        uses: actions/checkout@v7
+
+      - name: Check out the stored counts
+        uses: actions/checkout@v7
+        with:
+          ref: scholar-stats
+          path: stats
+
+      - name: Read the counts from Google Scholar
+        run: python3 .github/scripts/update_citations.py stats/citations.json
+
+      - name: Save the counts if they changed
+        working-directory: stats
+        run: |
+          if git diff --quiet; then
+            echo "Nothing to save."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --quiet --all --message "Update citation counts"
+          git push --quiet
