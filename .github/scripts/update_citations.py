@@ -8,8 +8,8 @@ Usage: update_citations.py <citations.json>
 
 The request says openly that it comes from a script, and it asks for a page that Scholar's robots.txt allows.
 Google Scholar turns away many of GitHub's machines all the same (HTTP 403). The counts then stay as they
-are and the next day's run asks again; the script makes no attempt to get around a refusal. Only when no
-answer has come for STALE_DAYS days does it fail, so that GitHub sends a notice.
+are and the next day's run asks again; the script makes no attempt to get around a refusal. For that reason
+the counts are also refreshed by hand whenever the website is updated: see README.md.
 """
 import datetime
 import gzip
@@ -38,6 +38,7 @@ HEADERS = {
     "Accept-Encoding": "gzip",
 }
 ROW = '<tr class="gsc_a_tr">'
+# A refusal is reported as a notice, and as a warning once the counts are older than this many days.
 STALE_DAYS = 30
 
 
@@ -99,12 +100,15 @@ def main():
     except Refused as problem:
         last_read = previous.get("checked") or previous.get("updated")
         days = (today - datetime.date.fromisoformat(last_read)).days if last_read else 0
-        if days > STALE_DAYS:
-            print(f"::error::Google Scholar has not answered for {days} days ({problem}). "
-                  "The citation counts on the site may be out of date.")
-            return 1
-        print(f"::notice::Google Scholar turned this machine away ({problem}). "
-              "The citation counts stay as they are; the next run asks again.")
+        if not last_read:
+            age = ""
+        elif days == 0:
+            age = " (last read today)"
+        else:
+            age = f" (last read {days} day{'' if days == 1 else 's'} ago)"
+        level = "warning" if days > STALE_DAYS else "notice"
+        print(f"::{level}::Google Scholar turned this machine away ({problem}). "
+              f"The citation counts stay as they are{age}.")
         return 0
 
     for key, count in counts.items():
